@@ -1,0 +1,198 @@
+/* Uses CSS variables defined in :root and [data-theme="dark"] (see step 3) */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: var(--navbar-bg);
+  backdrop-filter: blur(10px);
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-strong);
+  letter-spacing: 0.5px;
+}
+
+/* Desktop menu */
+.desktop-menu {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  transition: color 0.25s ease;
+}
+
+.nav-link:hover {
+  color: var(--text-strong);
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: var(--primary);
+}
+
+/* Theme toggle */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-subtle);
+  background: var(--card);
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+}
+
+.desktop-theme-toggle {
+  margin-left: 8px;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  width: 30px;
+  height: 24px;
+  position: relative;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.hamburger .bar {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--text-strong);
+  border-radius: 2px;
+  transition: transform 0.35s ease, opacity 0.25s ease, width 0.25s ease;
+}
+
+.hamburger .top { top: 0; }
+.hamburger .middle { top: 10.5px; width: 80%; }
+.hamburger .bottom { bottom: 0; width: 60%; right: 0; }
+
+.hamburger.open .top {
+  transform: translateY(10.5px) rotate(45deg);
+  width: 100%;
+}
+
+.hamburger.open .middle { opacity: 0; }
+
+.hamburger.open .bottom {
+  transform: translateY(-10.5px) rotate(-45deg);
+  width: 100%;
+}
+
+/* Backdrop */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 900;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 82%;
+  max-width: 340px;
+  height: 100vh;
+  background: var(--panel);
+  border-left: 1px solid var(--border-subtle);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+}
+
+.mobile-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--border-subtle);
+}
+
+.close-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.mobile-links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-links .nav-link {
+  font-size: 1.15rem;
+}
+
+.mobile-theme-toggle {
+  margin-top: auto;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .desktop-menu { display: none; }
+  .desktop-theme-toggle { display: none; }
+  .hamburger { display: block; }
+}
